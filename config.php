@@ -6,10 +6,15 @@
     
     require_once("lib/lib.class.php");
     
-    $servername = getenv('IP');
-    $username = getenv('C9_USER');
-    $database = "c9";
-    $password = "";
+    // $servername = getenv('IP');
+    // $username = getenv('C9_USER');
+    // $database = "c9";
+    // $password = "";
+    
+    $servername = "mysql.hostinger.jp";
+    $username = "u920304969_kamin";
+    $database = "u920304969_c9";
+    $password = "jdmru300";
     
     ORM::configure("mysql:host=$servername;dbname=$database");
     ORM::configure('username', $username);

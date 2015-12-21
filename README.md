@@ -8,3 +8,9 @@ sudo service apache2 restart
 SELECT  vs_id, TRUNCATE( AVG( my_data ) , 0 ) , TRUNCATE( AVG( op_data ) , 0 ) , FROM_UNIXTIME( TRUNCATE( UNIX_TIMESTAMP( data_time ) /300, 0 ) *300 ) 
 FROM min_data where data_time >=  FROM_UNIXTIME( TRUNCATE( UNIX_TIMESTAMP( now() ) /300, 0 ) *300 )
 GROUP BY TRUNCATE( UNIX_TIMESTAMP( data_time ) /300, 0 )
+
+
+rkamina:~/workspace (master) $ git init
+rkamina:~/workspace (master) $ git add .
+rkamina:~/workspace (master) $ git commit -m "hoge"
+rkamina:~/workspace (master) $ git remote add origin https://github.com/rkamina/gb-g.git
