@@ -36,7 +36,7 @@
     </div>
     
     <div id="guild_box" style="margin:20px 0px 0px 50px" >
-        <span id="this_date"></span>:対戦する相手の団名を入れてください：
+        <span id="this_date"></span>○ 対戦する相手の団名を入れてください：
         <input type="text" title="騎空団名" value="" id="g_name" name="g_name" >
         <input type="button" title="検索" value="ギルド検索" id="guild" name="guild">
         

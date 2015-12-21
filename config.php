@@ -1,5 +1,5 @@
 <?php
-
+    
     ini_set("date.timezone", "Asia/Tokyo");
     
     require_once("orm/idiorm.php");

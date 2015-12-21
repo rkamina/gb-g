@@ -2,8 +2,17 @@
 
     require_once("config.php");
     
+    header('Access-Control-Allow-Credentials: true');
+    header('Access-Control-Allow-Origin: http://gbf.game.mbga.jp');
+    
     $my_data = $_POST["my_data"];
     $op_data = $_POST["op_data"];
+    $rflg = false;
+    if(count($_POST) == 0){
+      $my_data = $_GET["my_data"];
+      $op_data = $_GET["op_data"];
+      $rflg = true;
+    }
     $date    = $_POST["date"];
 
     if($my_data == ''){
@@ -46,8 +55,18 @@
             $dat['my_data'] == -1 ? $my_no++ : $my_sum += $dat['my_data'];
             $dat['op_data'] == -1 ? $op_no++ : $op_sum += $dat['op_data'];
         }
-        $my_data = (int)round($my_sum/(count($min_data)-$my_no));
-        $op_data = (int)round($op_sum/(count($min_data)-$op_no));
+        
+        if((count($min_data)-$my_no) < 1){
+          $my_data = (int)$my_sum;
+        }else{
+          $my_data = (int)round($my_sum/(count($min_data)-$my_no));
+        }
+        
+        if((count($min_data)-$op_no) < 1){
+          $op_data = (int)$op_sum;
+        }else{
+          $op_data = (int)round($op_sum/(count($min_data)-$op_no));
+        }
     }
     
     
@@ -68,6 +87,6 @@
         $vs->op_data   = $op_data;
         $vs->save();
     }
-
-    return TRUE;
+    header( "Location: ./index.php" ) ;
+    return true;
 ?>

@@ -425,3 +425,12 @@ td,
 th {
   padding: 0;
 }
+
+.btn {
+	background: -moz-linear-gradient(top,#0099CC 0%,#006699);
+	background: -webkit-gradient(linear, left top, left bottom, from(#0099CC), to(#006699));
+	border: 1px solid #DDD;
+	color:#FFF;
+	width: 100px;
+	padding: 5px;
+}

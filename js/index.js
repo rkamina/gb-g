@@ -101,7 +101,7 @@ $(function () {
             async : false,
             success: function(obj) {
                 $.each(obj,function(i, v){
-                    var g_name = "<span data-i=" + v["id"] +" data-n=" +  v["name"] + "   '>[確定] </span>"
+                    var g_name = "<span data-i=" + v["id"] +" data-n=" +  v["name"] + " ' class='btn'>[確定] </span>"
                     var value = "";
                     if(v["id"] != "-NOT-"){
                         value = g_name + " : <a href='http://gbf.game.mbga.jp/#guild/detail/" + v["id"] +"' target ='_gild'>"+  v["name"] +"</a>";
