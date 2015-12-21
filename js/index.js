@@ -1,6 +1,16 @@
 
 $(function () {
 
+    var init_view = function(){
+        $("#g_list").empty();
+        $('#guild_box').show();     //ギルド名入力
+        $('#d_guild_box').hide();   //ギルド情報
+        $("#u_data_dd").hide();     //貢献度入力
+        $('#d_data_dd').hide();     //貢献度修正
+        $("#u_guild").hide();       //対戦相手修正
+        $('#container').css("visibility","hidden");        //グラフ
+        $('#layout_slider').css("visibility","hidden");    //シークバー
+    }
 
     $(window).load(function() {
         getdata();
@@ -12,6 +22,11 @@ $(function () {
 
     var getdata = function(){
         
+        
+        $("#g_list").empty();
+        $('#guild_box').hide();
+        $('#d_data_dd').hide();     //貢献度修正
+
         var value = $("#Slider5").val();
         value = value.split(";");
         
@@ -24,15 +39,15 @@ $(function () {
         $.ajax({
             type: 'POST',
             url: './getAveData.php',
-            data: {"from":ret_from, "to":ret_to},
+            data: {"from":ret_from, "to":ret_to, "date":$("#dp1").val()},
             dataType: 'json',
             async : false,
-            success: function(obj) {
-                
+            success: function(obj) {                
                 if(obj.is_null != undefined){
                     if(obj.is_null == 2){
                         //対戦相手なし
-                        $("#u_guild").hide();
+                        init_view();
+                        $('#layout_slider').css("visibility","visible");    //シークバー
                         return;
                     }
                     alert('データが取れませんでした');
@@ -41,15 +56,13 @@ $(function () {
                 var value = vsLinkget(obj.op_id, obj.op_name);
                 gr(obj);
                 $('#d_g_name').html(value);
-                $("#g_list").empty();
-                $('#guild_box').hide();
                 $('#d_guild_box').show();
                 $('#container').css("visibility","visible");
                 $('#layout_slider').css("visibility","visible");
             }
         });
     }
-
+    
     var gr = function(obj){
         $('#container').highcharts(obj);
         $('#sl_my_name').html(obj.my_name);
@@ -165,7 +178,59 @@ $(function () {
                 
             }
         });
+    });
+    
+    $('#dp1').datepicker({
+        format: 'yyyy-mm-dd',
+        language: 'ja',       // カレンダー日本語化のため
+        autoclose: true,
+        clearBtn: true
+    });
+    
+    $('#c_data_show').on("click", function(){
+        $('#d_data_dd').toggle();     //貢献度修正
+        if ($('#d_data_dd').css('display') == 'none') {
+            return;
+        }
 
+        var value = $("#Slider5").val();
+        value = value.split(";");
+        
+        var hours = Math.floor( value[0] / 60 );
+        var mins = ( value[0] - hours*60 );
+        var ret_from =  (hours < 10 ? "0"+hours : hours) + ":" + ( mins == 0 ? "00" : mins );
+        hours = Math.floor( value[1] / 60 );
+        mins = ( value[1] - hours*60 );
+        var ret_to =  (hours < 10 ? "0"+hours : hours) + ":" + ( mins == 0 ? "59" : mins );
+        if(value[1] == 1440){
+            ret_to = "23:59:59";
+        }
+        $.ajax({
+            type: 'POST',
+            url: './getAveData.php',
+            data: {"from":ret_from, "to":ret_to, "date":$("#dp1").val()},
+            dataType: 'json',
+            async : false,
+            success: function(obj) {                
+                if(obj.is_null != undefined){
+                    if(obj.is_null == 2){
+                        //対戦相手なし
+                        init_view();
+                        $('#layout_slider').css("visibility","visible");    //シークバー
+                        return;
+                    }
+                    //alert('データが取れませんでした');
+                    return;
+                }
+                $('#d_my_data').html(obj.my_name);
+                $('#d_op_data').html(obj.op_name);
+                $.each(obj.xAxis.categories, function(i,time){
+                    
+                    console.log(time);
+                    
+                });
+            }
+        });
     });
 
 });

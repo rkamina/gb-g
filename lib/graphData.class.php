@@ -24,7 +24,7 @@ class graphData{
     /**
      *横軸配列がすべての基本となるので注意
      */
-    public function __construct(array $xAxis){
+    public function __construct($xAxis = array()){
         $this->xAxis['categories'] = $xAxis;
         $this->seriesCount = count($xAxis);
     }

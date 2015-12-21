@@ -15,29 +15,29 @@
     
     ORM::configure('id_column',array("vs_id","data_time"));
     $vs =ORM::for_table('min_data')
-        ->where("data_time", $NOW_TIME)
-        ->where("vs_id", $VS_ID)
+        ->where("data_time", $t->NOW_TIME)
+        ->where("vs_id", $t->VS_ID)
         ->find_one();
 
     if($vs == FALSE){
         $vs = ORM::for_table('min_data')->create();
-        $vs->vs_id     = $VS_ID;
+        $vs->vs_id     = $t->VS_ID;
         $vs->my_data   = $my_data;
         $vs->op_data   = $op_data;
-        $vs->data_time = $NOW_TIME;
+        $vs->data_time = $t->NOW_TIME;
         $vs->save();
     }else{
         $vs->my_data   = $my_data;
         $vs->op_data   = $op_data;
-        $vs->data_time = $NOW_TIME;
+        $vs->data_time = $t->NOW_TIME;
         $vs->save();
     }
     
     //五分毎に平均値をとり、AVEテーブルに投入する
     $min_data = ORM::for_table('min_data')
-        ->where_equal("vs_id", $VS_ID)
-        ->where_gte("data_time", $NOW_TIME_0)
-        ->where_lte("data_time", $NOW_TIME_5)
+        ->where_equal("vs_id", $t->VS_ID)
+        ->where_gte("data_time", $t->NOW_TIME_0)
+        ->where_lte("data_time", $t->NOW_TIME_5)
         ->find_array();
     if(count($min_data) > 1){
         $my_no = 0;
@@ -53,15 +53,15 @@
     
     ORM::configure('id_column',array("vs_id","data_time"));
     $vs = ORM::for_table('ave_data')
-        ->where("vs_id", $VS_ID)
-        ->where("data_time", $NOW_TIME_0)
+        ->where("vs_id", $t->VS_ID)
+        ->where("data_time", $t->NOW_TIME_0)
         ->find_one();
     if($vs == FALSE){
         $vs = ORM::for_table('ave_data')->create();
-        $vs->vs_id     = $VS_ID;
+        $vs->vs_id     = $t->VS_ID;
         $vs->my_data   = $my_data;
         $vs->op_data   = $op_data;
-        $vs->data_time = $NOW_TIME_0;
+        $vs->data_time = $t->NOW_TIME_0;
         $vs->save();
     }else{
         $vs->my_data   = $my_data;
