@@ -32,10 +32,14 @@ $(function () {
         
         var hours = Math.floor( value[0] / 60 );
         var mins = ( value[0] - hours*60 );
-        var ret_from =  (hours < 10 ? "0"+hours : hours) + ":" + ( mins == 0 ? "00" : mins );
+        var ret_from =  (hours < 10 ? "0"+hours : hours) + ":" + ( mins == 0 ? "00" : mins ) +":00";
         hours = Math.floor( value[1] / 60 );
         mins = ( value[1] - hours*60 );
-        var ret_to =  (hours < 10 ? "0"+hours : hours) + ":" + ( mins == 0 ? "00" : mins );
+        var ret_to =  (hours < 10 ? "0"+hours : hours) + ":" + ( mins == 0 ? "00" : mins )+":59";
+        if(value[1] == 1440){
+            ret_to = "23:59:59";
+	}
+
         $.ajax({
             type: 'POST',
             url: './getAveData.php',
@@ -201,10 +205,7 @@ $(function () {
         var ret_from =  (hours < 10 ? "0"+hours : hours) + ":" + ( mins == 0 ? "00" : mins );
         hours = Math.floor( value[1] / 60 );
         mins = ( value[1] - hours*60 );
-        var ret_to =  (hours < 10 ? "0"+hours : hours) + ":" + ( mins == 0 ? "59" : mins );
-        if(value[1] == 1440){
-            ret_to = "23:59:59";
-        }
+        var ret_to =  (hours < 10 ? "0"+hours : hours) + ":" + ( mins == 0 ? "00" : mins );
         $.ajax({
             type: 'POST',
             url: './getAveData.php',

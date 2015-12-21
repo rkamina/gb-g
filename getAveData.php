@@ -44,7 +44,6 @@
         ->where_lte("data_time", $t->TO_TIME)
         ->order_by_asc("data_time")
         ->find_array();
-
     if(count($point) == 0){
         $ret['is_null'] = '1';
         echo json_encode($ret);

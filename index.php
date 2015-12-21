@@ -28,7 +28,7 @@
             <div class="four  columns" id="d_g_name2">
                 <h5>
                     <code id="u_data_show" >[ 貢献値 入力 ]</code>&nbsp;
-                    <code id="c_data_show" >[ 貢献値 削除 ]</code>
+                    <!-- code id="c_data_show" >[ 貢献値 削除 ]</code -->
                 </h5>
             </div>
         </div>
@@ -112,8 +112,18 @@
 
     <div class="layout-slider" id="layout_slider"  style="margin:10px 200px 10px 110px; visibility:hidden" >
     </div>
+    <div class="koukoku" id="koukoku"  style="margin:10px 200px 10px 110px;" >
+        <!-- admax -->
+        <script src="http://adm.shinobi.jp/s/625bb3900d062495a17fe10c4bce3fd0"></script>
+        <!-- admax -->
+        <!-- admax -->
+        <script src="http://adm.shinobi.jp/s/6fb3c902e49e0a00f99a1f3c16dda998"></script>
+        <!-- admax -->
+    </div>
     
     
+    
+
 </body>
 
 </html>
