@@ -45,7 +45,7 @@ class graphData{
     }
     
     public function setSeries($name, array $data){
-        if($this->seriesCount != count($data))return false;
+        //if($this->seriesCount != count($data))return false;
         $this->series[] = array('name' => $name, 'data' => $data);
     }
 

@@ -1,5 +1,6 @@
 <?php
 
+    ini_set("date.timezone", "Asia/Tokyo");
 ?>
 <!DOCTYPE HTML>
 <html>

@@ -87,6 +87,5 @@
         $vs->op_data   = $op_data;
         $vs->save();
     }
-    header( "Location: ./index.php" ) ;
-    return true;
+    return null;
 ?>

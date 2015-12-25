@@ -163,25 +163,20 @@ $(function () {
     $("#u_data_input").on("click", function(){
         var my_data   = $("#sl_my_data").val();
         var op_data   = $("#sl_op_data").val();
-        var date_data = $("#Slider5").val();
 
         $.ajax({
             type: 'POST',
             url: './setData.php',
             data: {
                 "my_data":my_data,
-                "op_data":op_data,
-                "date":date_data
+                "op_data":op_data
             },
             dataType: 'json',
             async : false,
             success: function(obj) {
-                $("#Slider5").slider("value", "420", "1440");
-                getdata();
-                $("#u_data_dd").hide();
-                
             }
         });
+        location.reload(true);
     });
     
     $('#dp1').datepicker({
